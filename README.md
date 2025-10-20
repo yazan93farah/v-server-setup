@@ -18,8 +18,8 @@ In this document, I explain step by step how I connected to my server, set up SS
 
 ## General Information
 
-- **Username:** `yazan-farah`  
-- **Server IP Address:** `91.99.224.69`
+- **Username:** `My-Username`  
+- **Server IP Address:** `My-Server-Ipaddress`
 
 ---
 
