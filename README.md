@@ -1,18 +1,17 @@
 # 🚀 Server Setup Tutorial – SSH, Git & Nginx
 
-In this tutorial, I will walk you through how I connected to my Linux server, set up secure SSH access, configured Git, installed Nginx, and changed its default configuration.
-
+The tutorial provides a step-by-step guide to connecting to a Linux server, securing SSH access, configuring Git, installing Nginx, and adjusting its default configuration.
 ---
 
 ## 📚 Table of Contents
 
-1. [Server Details](#server-details)  
-2. [Connecting via SSH](#connecting-via-ssh)  
-3. [Setting Up SSH Key Authentication](#setting-up-ssh-key-authentication)  
-4. [Disabling Password Authentication](#disabling-password-authentication)  
-5. [Installing Git & Configuring It](#installing-git--configuring-it)  
-6. [Installing Nginx](#installing-nginx)  
-7. [Changing Nginx to Serve `test.html`](#changing-nginx-to-serve-testhtml)  
+1. [Server Details](#🔐-server-details)  
+2. [Connecting via SSH](#🔌-connecting-via-ssh)  
+3. [Setting Up SSH Key Authentication](#🔑-setting-up-ssh-key-authentication)  
+4. [Disabling Password Authentication](#🚫-disabling-password-authentication)  
+5. [Installing Git & Configuring It](#🛠-installing-git--configuring-it)  
+6. [Installing Nginx](#🌐-nginx)  
+7. [Changing Nginx to Serve `test.html`](#⚙️-changing-nginx-to-serve-testhtml)  
 8. [✅ Summary](#✅-summary)
 
 ---
