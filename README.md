@@ -1,112 +1,181 @@
-# Welcome to My First Markdown Tutorial
+# 🚀 Server Setup Tutorial – SSH, Git & Nginx
 
-In this document, I explain step by step how I connected to my server, set up SSH key authentication, disabled password login, and installed Nginx.
+In this tutorial, I will walk you through how I connected to my Linux server, set up secure SSH access, configured Git, installed Nginx, and changed its default configuration.
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-1. [General Information](#general-information)  
-2. [Connecting to the Server](#connecting-to-the-server)  
-3. [Setting Up the SSH Key](#setting-up-the-ssh-key)  
+1. [Server Details](#server-details)  
+2. [Connecting via SSH](#connecting-via-ssh)  
+3. [Setting Up SSH Key Authentication](#setting-up-ssh-key-authentication)  
 4. [Disabling Password Authentication](#disabling-password-authentication)  
-5. [Installing Nginx](#installing-nginx)  
-6. [Modifying the Nginx Configuration](#modifying-the-nginx-configuration)  
-7. [Summary](#summary)
+5. [Installing Git & Configuring It](#installing-git--configuring-it)  
+6. [Installing Nginx](#installing-nginx)  
+7. [Changing Nginx to Serve `test.html`](#changing-nginx-to-serve-testhtml)  
+8. [✅ Summary](#✅-summary)
 
 ---
 
-## General Information
+## 🔐 Server Details
 
-- **Username:** `My-Username`  
-- **Server IP Address:** `My-Server-Ipaddress`
+- **Username:** `your-username`
+- **Server IP Address:** `your.server.ip.address`
 
 ---
 
-## Connecting to the Server
+## 🔌 Connecting via SSH
 
-First, I connected to the server using SSH:
+Use the following command to connect to your server:
 
 ```bash
-ssh yazan-farah@91.99.224.69
+ssh your-username@your.server.ip.address
 ```
 
-At first, it asked for my password. After logging in successfully, I copied my SSH public key to the server and tested key-based login.
+If it's your first time, it will ask for your password.
 
 ---
 
-## Setting Up the SSH Key
+## 🔑 Setting Up SSH Key Authentication
 
-After copying my **SSH public key** to the server, I tested the connection again.  
-It worked without asking for a password, confirming that SSH key authentication is set up correctly.
+1. **On your local machine**, generate an SSH key if you don’t have one:
 
----
+   ```bash
+   ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+   ```
 
-## Disabling Password Authentication
-
-To ensure only SSH keys can be used to log in, I disabled password authentication in the SSH daemon configuration.
-
-**Edit the SSH config (on the server):**
-
-```bash
-sudo nano /etc/ssh/sshd_config
-```
-
-**Set this option (ensure it’s not commented):**
-```conf
-PasswordAuthentication no
-```
-
-**Apply the change:**
-```bash
-sudo systemctl reload ssh    # or: sudo systemctl restart ssh
-```
-
-**Test again from your client:**
-```bash
-ssh yazan-farah@91.99.224.69
-```
-
-The connection works without a password, meaning password login is deactivated and only my SSH key can access the server.
+2. **Copy your public key to the server:**
+   ```bash
+    ssh-copy-id -i ~/.ssh/fileToCopy user@remote_host
+    
+   ```
+3. **Test login without password:**
+   ```bash
+   ssh your-username@your.server.ip.address
+   ```
 
 ---
 
-## Installing Nginx
+## 🚫 Disabling Password Authentication
 
-I installed Nginx with the following commands:
+To improve security, disable password login:
+
+1. SSH into the server and open SSH config:
+   ```bash
+   sudo nano /etc/ssh/sshd_config
+   ```
+
+2. Find and set:
+   ```conf
+   PasswordAuthentication no
+   ```
+
+3. Restart the SSH service:
+   ```bash
+   sudo systemctl restart ssh
+   ```
+
+4. Test the password login : 
+   ```bash
+   ssh -o PubKeyAuthentication=no -i pfad/zum/private-key your-username@your.server.ip.address
+   ```
+
+
+✅ Now only SSH key authentication works.
+
+
+---
+
+## 🛠 Installing Git & Configuring It
+
+### Install Git:
+```bash
+sudo apt update
+sudo apt install git
+```
+
+### Configure Git (one-time setup):
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your_email@example.com"
+```
+
+### Generate ssh-Key for Github (one-time setup):
+```bash
+ ssh-keygen -t ed25519 -C "generated-key-name" 
+ ssh-add ~/.ssh/generated-key-name
+ ```
+✅ Git is now set up for use with version control.
+
+---
+
+## 🌐 Installing Nginx
+
+To install and start Nginx:
 
 ```bash
 sudo apt update
 sudo apt install nginx
 ```
 
+After installation, Nginx should be running:
+
+```bash
+systemctl status nginx
+```
+
 ---
 
-## Modifying the Nginx Configuration
+## ⚙️ Changing Nginx to Serve `test.html`
 
-I changed the configuration so the server serves `test.html` instead of the default `index.html`, then restarted Nginx.
+Let’s change the default page from `index.html` to `test.html`.
 
-> Adjust the **index** directive for the relevant server block (for example in `/etc/nginx/sites-available/default`):
+1. **Create the test page**:
+```bash
+sudo touch /var/www/html/test.html
+sudo nano /var/www/html/test.html
+```
 
-```conf
+and added this <div>Hello, World!</div> to the test.html
+
+
+2. **Edit the Nginx default site config**:
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+3. **Change the index directive**:
+```nginx
 server {
-    # ...
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
     root /var/www/html;
-    index test.html;  # serve test.html instead of index.html
-    # ...
+    index test.html;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
 }
 ```
 
-**Restart Nginx to apply changes:**
+4. **Reload Nginx**:
 ```bash
-sudo systemctl restart nginx
+sudo systemctl reload nginx
 ```
+
+✅ Your server should now serve `test.html` at `http://your.server.ip.address`.
 
 ---
 
-## Summary
+## ✅ Summary
 
-- Connected to the server via SSH  
-- Copied and tested the SSH public key (passwordless login works)  
-- Disabled password authentication (`PasswordAuthentication no`)  
-- Installed Nginx and configured it to serve `test.html` instead of `index.html`
+- ✅ Connected via SSH  
+- ✅ Set up SSH key login and disabled password login  
+- ✅ Installed Git and configured name/email  
+- ✅ Installed Nginx and verified it runs  
+- ✅ Served a custom `test.html` page via Nginx  
+
+---
