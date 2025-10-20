@@ -18,8 +18,8 @@ The tutorial provides a step-by-step guide to connecting to a Linux server, secu
 
 ##  Server Details
 
-- **Username:** `your-username`
-- **Server IP Address:** `your.server.ip.address`
+- **Username:** `<your-username>`
+- **Server IP Address:** `<your.server.ip.address>`
 
 ---
 
@@ -45,8 +45,7 @@ If it's your first time, it will ask for your password.
 
 2. **Copy your public key to the server:**
    ```bash
-    ssh-copy-id -i ~/.ssh/fileToCopy user@remote_host
-    
+    ssh-copy-id -i ~/.ssh/fileToCopy user@remote_host   
    ```
 3. **Test login without password:**
    ```bash
