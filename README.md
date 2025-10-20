@@ -5,18 +5,18 @@ The tutorial provides a step-by-step guide to connecting to a Linux server, secu
 
 ## 📚 Table of Contents
 
-1. [Server Details](#🔐-server-details)  
-2. [Connecting via SSH](#🔌-connecting-via-ssh)  
-3. [Setting Up SSH Key Authentication](#🔑-setting-up-ssh-key-authentication)  
-4. [Disabling Password Authentication](#🚫-disabling-password-authentication)  
-5. [Installing Git & Configuring It](#🛠-installing-git--configuring-it)  
-6. [Installing Nginx](#🌐-nginx)  
-7. [Changing Nginx to Serve `test.html`](#⚙️-changing-nginx-to-serve-testhtml)  
-8. [✅ Summary](#✅-summary)
+1. [Server Details](#server-details)  
+2. [Connecting via SSH](#connecting-via-ssh)  
+3. [Setting Up SSH Key Authentication](#setting-up-ssh-key-authentication)  
+4. [Disabling Password Authentication](#disabling-password-authentication)  
+5. [Installing Git & Configuring It](#installing-git--configuring-it)  
+6. [Installing Nginx](#nginx)  
+7. [Changing Nginx to Serve `test.html`](#changing-nginx-to-serve-testhtml)  
+8. [Summary](#Ssummary)
 
 ---
 
-## 🔐 Server Details
+##  Server Details
 
 - **Username:** `your-username`
 - **Server IP Address:** `your.server.ip.address`
@@ -35,7 +35,7 @@ If it's your first time, it will ask for your password.
 
 ---
 
-## 🔑 Setting Up SSH Key Authentication
+##  Setting Up SSH Key Authentication
 
 1. **On your local machine**, generate an SSH key if you don’t have one:
 
@@ -55,7 +55,7 @@ If it's your first time, it will ask for your password.
 
 ---
 
-## 🚫 Disabling Password Authentication
+##  Disabling Password Authentication
 
 To improve security, disable password login:
 
@@ -108,7 +108,7 @@ git config --global user.email "your_email@example.com"
 
 ---
 
-## 🌐 Installing Nginx
+##  Installing Nginx
 
 To install and start Nginx:
 
@@ -125,7 +125,7 @@ systemctl status nginx
 
 ---
 
-## ⚙️ Changing Nginx to Serve `test.html`
+##  Changing Nginx to Serve `test.html`
 
 Let’s change the default page from `index.html` to `test.html`.
 
@@ -169,7 +169,7 @@ sudo systemctl reload nginx
 
 ---
 
-## ✅ Summary
+##  Summary
 
 - ✅ Connected via SSH  
 - ✅ Set up SSH key login and disabled password login  
