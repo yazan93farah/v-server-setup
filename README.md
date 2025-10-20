@@ -41,7 +41,7 @@ If it's your first time, it will ask for your password.
 1. **On your local machine**, generate an SSH key if you don’t have one:
 
    ```bash
-   ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    ssh-keygen -t ed25519 -C "generated-key-name" 
    ```
 
 2. **Copy your public key to the server:**
