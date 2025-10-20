@@ -179,3 +179,4 @@ sudo systemctl reload nginx
 - ✅ Served a custom `test.html` page via Nginx  
 
 ---
+ 
